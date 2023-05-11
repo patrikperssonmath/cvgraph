@@ -86,7 +86,9 @@ class TraceGenerator:
 
         for index in range(skip, max_len):
 
-            image = dataset.get_image(index)
+            image, _ = dataset.get_image(index)
+
+            image = (image.permute(1, 2, 0).numpy()*255).astype(np.uint8)
 
             trace_list, finised_traces = self.track(trace_list, image, index)
 
@@ -131,7 +133,7 @@ class TraceGenerator:
 
                 if val > 0.8:
 
-                    #print(f"empty area {x}, {y}, val {val}")
+                    # print(f"empty area {x}, {y}, val {val}")
                     return mask, True
 
         return mask, False
