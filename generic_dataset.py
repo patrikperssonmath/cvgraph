@@ -61,4 +61,4 @@ class GenericDataset:
                               self.map2,
                               cv2.INTER_CUBIC)
 
-        return cv2.resize(image, self.size)
+        return cv2.resize(image, self.size), None

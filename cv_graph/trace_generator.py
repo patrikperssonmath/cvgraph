@@ -4,7 +4,7 @@ import os
 import cv2
 import numpy as np
 from cv_graph.fps_counter import FPS
-
+import torch
 
 class TraceGenerator:
     def __init__(self, debug=False, max_trace_len=-1) -> None:
@@ -88,7 +88,9 @@ class TraceGenerator:
 
             image, _ = dataset.get_image(index)
 
-            image = (image.permute(1, 2, 0).numpy()*255).astype(np.uint8)
+            if torch.is_tensor(image):
+
+                image = (image.permute(1, 2, 0).numpy()*255).astype(np.uint8)
 
             trace_list, finised_traces = self.track(trace_list, image, index)
 
