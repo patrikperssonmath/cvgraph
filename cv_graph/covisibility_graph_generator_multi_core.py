@@ -61,7 +61,7 @@ def check_edge(p0, p1, min_points, min_point_flow, scale, ransac_th, max_homogra
 
 
 class CovisibilityGraphGenerator:
-    def __init__(self, min_points=20, min_point_flow=0.01, max_homography_agreement=0.75, ransac_th=3.0, graph_name="graph") -> None:
+    def __init__(self, min_points=20, min_point_flow=0.01, max_homography_agreement=0.75, ransac_th=3.0, graph_name="graph", scale=[320, 320]) -> None:
 
         self.min_points = min_points
         self.min_point_flow = min_point_flow
@@ -72,7 +72,7 @@ class CovisibilityGraphGenerator:
         self.fail_count = 0
         self.graph_name = graph_name
 
-        self.scale = np.array([320, 320], dtype=np.float32).reshape(1, 1, 2)
+        self.scale = np.array(scale, dtype=np.float32).reshape(1, 1, 2)
 
     def check_if_processed(self, flow_path):
 
